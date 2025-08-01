@@ -1,0 +1,46 @@
+<div class="  flex justify-content-center align-items-center min-h-screen   surface-ground ">
+  <div class="surface-card p-5  shadow-4 border-round-lg w-full sm:w-25rem">
+
+    <!-- الصورة والعنوان -->
+    <div class="flex flex-column align-items-center mb-4">
+      <p-avatar icon="pi pi-user" shape="circle" size="xlarge"></p-avatar>
+      <h1 class="text-center mt-3 font-bold  te-color">تسجيل الدخول</h1>
+    </div>
+
+    <div class="p-fluid">
+
+      <!-- اسم المستخدم -->
+      <div class="p-field mb-3 flex flex-column gap-2">
+        <label for="username" class="font-bold  te-color">اسم المستخدم</label>
+        <input pInputText id="username" placeholder="أدخل اسم المستخدم" class="w-full" />
+      </div>
+
+      <!-- كلمة المرور -->
+      <div class="p-field mb-3 flex flex-column gap-2">
+        <label for="password" class="font-bold  te-color">كلمة المرور</label>
+        <p-password
+          id="password"
+          placeholder="••••••••"
+          [feedback]="false"
+          [toggleMask]="true"
+          inputStyleClass="w-full"
+        ></p-password>
+      </div>
+
+      <!-- تذكرني -->
+      <div class="p-field-checkbox mb-3 flex align-items-center gap-2">
+        <p-checkbox inputId="remember" binary="true"></p-checkbox>
+        <label for="remember" class="font-bold  te-color">تذكرني</label>
+      </div>
+
+      <!-- زر الدخول -->
+      <button
+        pButton
+        label="دخول"
+        class="p-button-lg p-button-primary w-full"
+        style="background-color: #157c6A; border:none;"
+      ></button>
+
+    </div>
+  </div>
+</div>
