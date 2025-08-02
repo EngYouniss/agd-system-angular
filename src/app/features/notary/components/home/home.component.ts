@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavbarComponent } from "../../layouts/navbar/navbar.component";
+import { SidebarComponent } from "../../layouts/sidebar/sidebar.component";
+import { ButtonModule } from 'primeng/button';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    NavbarComponent,
+    SidebarComponent,
+    ButtonModule,
 
-
-] ,
-   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  ],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  contractTypes = [
-    { name: 'عقد عمل', code: 'EMP' },
-    { name: 'عقد إيجار', code: 'RENT' },
-    { name: 'عقد شراكة', code: 'PART' },
-    { name: 'عقد بيع', code: 'SALE' }
-  ];
+
+
+
+
 }

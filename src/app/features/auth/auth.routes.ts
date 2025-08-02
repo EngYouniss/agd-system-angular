@@ -5,4 +5,5 @@ export const AUTH_ROUTES:Routes=[
 {
   path:'login',component:LoginComponent
 }
+
 ]

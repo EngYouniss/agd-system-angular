@@ -1,0 +1,129 @@
+.main-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--dark-color)) !important;
+  color: white !important;
+  padding: 0.75rem 0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  position: fixed !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  border-bottom: 3px solid var(--gold-color) !important;
+  border-radius: 0 !important;
+
+  // تعديلات لـ p-menubar
+  .p-menubar {
+    border: none !important;
+    background: transparent !important;
+
+    .p-menubar-start {
+      padding-left: 1.5rem;
+    }
+
+    .p-menubar-end {
+      padding-right: 1.5rem;
+    }
+  }
+
+  // الشعار
+  .logo {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: white;
+    letter-spacing: -1px;
+
+    span {
+      color: var(--gold-color);
+      font-weight: 700;
+    }
+  }
+
+  // الشعار الفرعي
+  .logo-sublogo {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-right: 10px;
+  }
+
+  // زر الإشعارات
+  .notification-btn {
+    position: relative;
+
+    .p-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+      background-color: var(--danger-color) !important;
+      color: white !important;
+      min-width: 1.25rem;
+      height: 1.25rem;
+      font-size: 0.7rem;
+    }
+  }
+
+  // رأس قائمة المستخدم
+  .user-menu-header {
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 0.5rem;
+    cursor: default;
+  }
+
+  // صورة المستخدم
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3) !important;
+    }
+  }
+
+  // قائمة اختيار اللغة
+  .language-dropdown {
+    border: none !important;
+    background: transparent !important;
+    color: white !important;
+
+    .p-dropdown-label {
+      color: white !important;
+      padding: 0.5rem !important;
+      padding-right: 0 !important;
+    }
+
+    .p-dropdown-trigger {
+      color: white !important;
+      width: 2rem !important;
+    }
+
+    .p-dropdown-panel {
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  // الأزرار العامة
+  .p-button {
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}
+
+// تعديلات للهواتف
+@media (max-width: 992px) {
+  .main-header {
+    .p-menubar-start {
+      padding-left: 1rem;
+    }
+
+    .p-menubar-end {
+      padding-right: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+    }
+  }
+}
