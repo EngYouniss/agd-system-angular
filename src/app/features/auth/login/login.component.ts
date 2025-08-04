@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { CheckboxModule } from 'primeng/checkbox';
-import { Router, RouterLink } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
+
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+
 import { IUser } from '../../../core/models/iuser';
 import { AuthService } from '../services/auth.service';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { RippleModule } from 'primeng/ripple';
-
+import { TokenService } from '../../../core/services/token.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [InputTextModule,
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+  imports: [
+    InputTextModule,
     PasswordModule,
-    BadgeModule,
     ButtonModule,
     AvatarModule,
+    BadgeModule,
     CheckboxModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
@@ -30,71 +36,73 @@ import { RippleModule } from 'primeng/ripple';
     RippleModule
   ],
   providers: [MessageService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
-  constructor(private _userService: AuthService,
+
+  form = this._formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
+  });
+
+  constructor(
+    private _authService: AuthService,
     private _formBuilder: FormBuilder,
     private _router: Router,
-    private _ngxSpinner: NgxSpinnerService,
-    private _messageService:MessageService
-  ) {
+    private _spinner: NgxSpinnerService,
+    private _messageService: MessageService,
+    private _tokenService:TokenService
+  ) {}
 
-  }
   ngOnInit(): void {
-    this._ngxSpinner.show();
-    setTimeout(() => {
-      this._ngxSpinner.hide();
-    }, 3000);
+    this._showSpinnerBriefly();
   }
-  user: IUser = {} as IUser;
-  message: string = '';
-  form = this._formBuilder.group(
-    {
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required,],
-    }
-  )
 
-  login() {
+  private _showSpinnerBriefly(): void {
+    this._spinner.show();
+    setTimeout(() => this._spinner.hide(), 1000);
+  }
+
+  login(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const email = this.form.get('email')?.value;
-    const password = this.form.get('password')?.value;
-    this._ngxSpinner.show();
-    setTimeout(() => {
-      this._ngxSpinner.hide();
-    }, 3000)
-    this._userService.login(email!, password!).subscribe(data => {
+    const { email, password } = this.form.value;
 
-      if (data.length > 0) {
-        this.user = data[0]
-        this.message = 'تم تسجيل الدخول بنجاح!';
-        this.show()
+    this._spinner.show();
 
-        this._router.navigateByUrl('/notary/home');
+    this._authService.login(email!, password!).subscribe({
+      next: (res) => {
+        this._spinner.hide();
 
+        if (res.status === 'success') {
+          this._tokenService.setToken(res.token);
+          console.log(res.token);
 
-      } else {
-        this.message = 'يوجد خطأ في الإيميل او كلمة المرور';
-        this.show()
+          this._showMessage('success', 'تم تسجيل الدخول بنجاح');
+          this._router.navigate(['/notary/home']);
+        } else {
+          this._showMessage('error', 'خطأ في الإيميل أو كلمة المرور');
+        }
+      },
+      error: () => {
+        this._spinner.hide();
+        this._showMessage('error', 'خطأ في السيرفر');
       }
     });
   }
 
- show() {
-        this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
-    }
-
-  isInvalid(field: string, error: string) {
-    return this.form.get(field)?.errors?.[error] && this.form.get(field)?.dirty;
+  private _showMessage(severity: 'success' | 'error', message: string): void {
+    this._messageService.add({
+      severity,
+      summary: severity === 'success' ? 'نجاح' : 'خطأ',
+      detail: message,
+    });
   }
 
-
-
-
+  isInvalid(field: string, error: string): boolean {
+    const control = this.form.get(field);
+    return !!(control?.errors?.[error] && control?.touched);
+  }
 }
