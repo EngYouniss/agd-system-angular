@@ -14,7 +14,7 @@ export class AuthService {
 
   }
   login(email: string, password: string){
-  return this._http.post<any>(`${environment.baseUrl}`,{
+  return this._http.post<ILogin>(`${environment.baseUrl}`,{
     email,
     password
   });

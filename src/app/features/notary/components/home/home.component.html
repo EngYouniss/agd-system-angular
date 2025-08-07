@@ -1,2 +1,65 @@
-<app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+
+  <!-- Layout wrapper -->
+<div class="app-layout flex flex-column min-h-screen">
+
+
+  <!-- Navbar في الأعلى -->
+  <app-navbar class="navbar-fixed"></app-navbar>
+<!-- محتوى الصفحة بعد النافبار -->
+  <div class="layout-body flex flex-1" style="direction: rtl;">
+
+    <!-- Sidebar في اليمين -->
+    <app-sidebar class="sidebar-area"></app-sidebar>
+
+    <!-- محتوى الصفحة بجانب السايدبار -->
+    <main class="flex-1 p-6">
+<div class="p-5 home-container">
+  <div class="text-center mb-6">
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">مرحبا بك في نظام توثيق العقود الشرعية</h2>
+    <p class="text-gray-600">اختر نوع العقد الذي ترغب في إنشائه</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- بطاقة عقد زواج -->
+    <div class="contract-card">
+      <i class="pi pi-heart text-pink-500 text-4xl mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">عقد زواج</h3>
+      <p class="text-sm text-gray-600 mb-4">إنشاء عقد زواج رسمي موثق إلكترونيًا</p>
+      <button pButton type="button" label="ابدأ الآن" icon="pi pi-plus" class="p-button-sm p-button-success"></button>
+    </div>
+
+    <!-- بطاقة طلاق -->
+    <div class="contract-card">
+      <i class="pi pi-ban text-red-500 text-4xl mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">عقد طلاق</h3>
+      <p class="text-sm text-gray-600 mb-4">إصدار وثيقة طلاق موثقة ومعتمدة</p>
+      <button pButton type="button" label="ابدأ الآن" icon="pi pi-plus" class="p-button-sm p-button-danger"></button>
+    </div>
+
+    <!-- بطاقة رجعة -->
+    <div class="contract-card">
+      <i class="pi pi-refresh text-blue-500 text-4xl mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">عقد رجعة</h3>
+      <p class="text-sm text-gray-600 mb-4">توثيق الرجعة بعد الطلاق الرجعي بشكل رسمي</p>
+      <button pButton type="button" label="ابدأ الآن" icon="pi pi-plus" class="p-button-sm p-button-info"></button>
+    </div>
+
+    <!-- بطاقة سابق -->
+    <div class="contract-card">
+      <i class="pi pi-history text-indigo-500 text-4xl mb-4"></i>
+      <h3 class="text-xl font-semibold mb-2">عقد سابق</h3>
+      <p class="text-sm text-gray-600 mb-4">إدخال بيانات عقد سابق لتوثيقه رقميًا</p>
+      <button pButton type="button" label="ابدأ الآن" icon="pi pi-plus" class="p-button-sm p-button-warning"></button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    </main>
+
+  </div>
+
+</div>

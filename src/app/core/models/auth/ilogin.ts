@@ -4,4 +4,5 @@ export interface ILogin {
     status: 'success' | 'error';
   message?: string;
   user?: IUser;
+  token:string;
 }

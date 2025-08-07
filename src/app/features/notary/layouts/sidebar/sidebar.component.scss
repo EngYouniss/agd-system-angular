@@ -1,0 +1,178 @@
+.main-sidebar {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.08);
+  color: #2d3748;
+  direction: rtl;
+  border-left: 1px solid #e2e8f0;
+  transition: all 0.4s ease;
+
+  .sidebar-header {
+    padding: 1.5rem;
+    color: rgb(74, 23, 23);
+    text-align: center;
+    margin-bottom: 1rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+  }
+
+  .sidebar-item {
+    color: #4a5568;
+    padding: 0.9rem 1.5rem;
+    margin: 0.5rem 0.8rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    i {
+      margin-left: 0.8rem;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      transition: width 0.3s ease;
+      z-index: 0;
+    }
+
+    &:hover:not(.active) {
+      color: #434190;
+      transform: translateX(-5px);
+
+      &::before {
+        width: 100%;
+      }
+
+      i {
+        color: #667eea;
+        transform: scale(1.1);
+      }
+    }
+
+    &.active {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+      border-right: 4px solid #667eea;
+      color: #434190;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+
+      i {
+        color: #667eea;
+      }
+    }
+  }
+
+  .sidebar-divider {
+    border-top: 1px solid #e2e8f0;
+    margin: 1rem 1.2rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: 0;
+      width: 30%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #667eea, transparent);
+    }
+  }
+
+  .sidebar-footer {
+    padding: 1rem;
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #718096;
+    border-top: 1px solid #e2e8f0;
+
+    .version {
+      color: #667eea;
+      font-weight: 500;
+    }
+  }
+
+  // تأثيرات خاصة عند التفاعل
+  &:hover {
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.main-sidebar {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.03), transparent);
+  }
+}
+
+.sidebar-item {
+  i {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #667eea;
+      transition: width 0.3s ease;
+    }
+  }
+
+  &:hover i::after {
+    width: 100%;
+  }
+}
+
+.sidebar-item {
+  &:focus {
+    outline: none;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+  }
+}
+
+.sidebar-item.disabled {
+  position: relative;
+  color: #a0aec0;
+
+  &::before {
+    content: 'قريباً';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    background: #667eea;
+    color: white;
+    padding: 0.1rem 0.5rem;
+    border-radius: 10px;
+  }
+
+  i {
+    opacity: 0.6;
+  }
+}

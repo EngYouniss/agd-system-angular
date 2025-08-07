@@ -1,0 +1,27 @@
+.app-layout {
+  .navbar-fixed {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .layout-body {
+    flex: 1;
+    display: flex;
+
+    .sidebar-area {
+      width: 250px;
+      min-height: calc(100vh - 80px); // ناقص ارتفاع النافبار
+      background: linear-gradient(to bottom, #1e3a8a, #1e1b4b);
+    }
+
+    main {
+      flex: 1;
+      background-color: #f9fafb;
+      padding: 2rem;
+      min-height: calc(100vh - 80px); // نفس النافبار
+    }
+  }
+}

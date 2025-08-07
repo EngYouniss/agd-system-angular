@@ -1,24 +1,18 @@
 import { Component } from '@angular/core';
-import { SidebarModule } from 'primeng/sidebar';
-import { SidebarService } from '../../../../shared/sidebar.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SidebarModule],
+  imports: [CommonModule, RouterModule, RippleModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-  visible: boolean = false;
-
-  constructor(private sidebarService: SidebarService) {
-    this.sidebarService.sidebarVisible$.subscribe(v => {
-      this.visible = v;
-    });
-  }
-
-  onHide() {
-    this.sidebarService.hide();
+  logout() {
+    console.log('تسجيل الخروج...');
+    // يمكنك استبداله بـ this.router.navigate(['/login']);
   }
 }

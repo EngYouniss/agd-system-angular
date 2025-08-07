@@ -1,48 +1,59 @@
-<p-sidebar [(visible)]="visible" position="right" (onHide)="onHide()">
-  <nav class="col-lg-2 main-sidebar" id="mainSidebar">
-                <div class="sidebar-item active" data-section="dashboard">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>لوحة التحكم</span>
-                </div>
+<nav class="main-sidebar w-15rem h-screen flex flex-column justify-between" style="direction: rtl;">
+  <!-- <div class="sidebar-header flex justify-between items-center px-4 py-3 border-bottom-1 border-white-alpha-10 mb-2">
+    <h3 class="m-0 text-white font-semibold text-xxl">نظام عقد</h3>
+    <button class="sidebar-close-btn p-button p-button-icon-only p-button-text text-white lg:hidden">
+      <i class="pi pi-times"></i>
+    </button>
+  </div> -->
 
-                <div class="sidebar-item" data-section="contracts">
-                    <i class="fas fa-file-contract"></i>
-                    <span>إدارة العقود</span>
-                </div>
-                <div class="sidebar-item" data-section="contracts">
-                    <i class="fas fa-file-contract"></i>
-                    <span>العقودالمرفوظة  </span>
-                </div>
-                <div class="sidebar-item" data-section="contracts">
-                    <i class="fas fa-file-contract"></i>
-                    <span>الإشعارات </span>
-                </div>
+  <div class="sidebar-content overflow-y-auto">
+    <div class="sidebar-item active flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-home ml-3 text-base"></i>
+      <span>لوحة التحكم</span>
+    </div>
 
+    <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-file ml-3 text-base"></i>
+      <span>إدارة العقود</span>
+    </div>
 
+    <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-times-circle ml-3 text-base"></i>
+      <span>العقود المرفوضة</span>
+    </div>
 
+    <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-bell ml-3 text-base"></i>
+      <span>الإشعارات</span>
+    </div>
 
+    <div class="sidebar-divider border-top-1 border-white-alpha-10 mx-3 my-3"></div>
 
+    <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-folder ml-3 text-base"></i>
+      <span>الأرشيف</span>
+    </div>
 
+    <div class="sidebar-divider border-top-1 border-white-alpha-10 mx-3 my-3"></div>
 
-                <div class="sidebar-divider"></div>
+    <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-cog ml-3 text-base"></i>
+      <span>الإعدادات</span>
+    </div>
 
+    <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
+      <i class="pi pi-users ml-3 text-base"></i>
+      <span>الدعم الفني</span>
+    </div>
+  </div>
 
-
-                <div class="sidebar-item" data-section="archive">
-                    <i class="fas fa-archive"></i>
-                    <span>الأرشيف</span>
-                </div>
-
-                <div class="sidebar-divider"></div>
-
-                <div class="sidebar-item" data-section="settings">
-                    <i class="fas fa-cogs"></i>
-                    <span>الإعدادات</span>
-                </div>
-
-                <div class="sidebar-item" data-section="support">
-                    <i class="fas fa-headset"></i>
-                    <span>الدعم الفني</span>
-                </div>
-            </nav>
-</p-sidebar>
+  <div class="sidebar-footer px-4 py-3 border-top-1 border-white-alpha-10">
+    <div class="system-version flex align-items-center text-white-alpha-60 text-sm mb-2">
+      <i class="pi pi-code ml-2"></i>
+      <span>الإصدار 1.0.0</span>
+    </div>
+    <div class="copyright text-white-alpha-40 text-xs text-center">
+      © جميع الحقوق محفوظة
+    </div>
+  </div>
+</nav>

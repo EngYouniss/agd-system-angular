@@ -1,0 +1,35 @@
+<div class="surface-card p-3 shadow-2 border-round">
+  <div class="flex align-items-center justify-content-between w-full">
+
+    <!-- ✅ الجهة اليمنى: الشعار -->
+    <div class="flex align-items-center gap-3">
+      <img src="../../../../../assets/images/logoagd.png" alt="Logo" style="width: 100px; height: 70px;" />
+    </div>
+
+    <!-- ✅ الوسط: مربع البحث -->
+    <div class="flex align-items-center">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="بحث..." class="w-20rem" />
+      </span>
+    </div>
+
+    <!-- ✅ الجهة اليسرى: الاسم + البروفايل + الإشعارات -->
+    <div class="flex align-items-center gap-4">
+
+      <!-- الإشعارات -->
+      <div class="relative">
+        <button pButton type="button" icon="pi pi-bell" class="p-button-rounded p-button-text p-button-plain" (click)="notificationMenu.toggle($event)"></button>
+        <p-menu #notificationMenu [popup]="true" [model]="notifications"></p-menu>
+      </div>
+
+      <!-- اسم + بروفايل مع القائمة -->
+      <div class="flex align-items-center gap-2 cursor-pointer" (click)="profileMenu.toggle($event)">
+        <span class="font-medium text-color">أبوبكر أحمد</span>
+        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" size="large"></p-avatar>
+      </div>
+      <p-menu #profileMenu [popup]="true" [model]="profileMenuItems"></p-menu>
+
+    </div>
+  </div>
+</div>
