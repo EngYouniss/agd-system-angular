@@ -1,46 +1,48 @@
-<nav class="main-sidebar w-15rem h-screen flex flex-column justify-between" style="direction: rtl;">
-  <!-- <div class="sidebar-header flex justify-between items-center px-4 py-3 border-bottom-1 border-white-alpha-10 mb-2">
-    <h3 class="m-0 text-white font-semibold text-xxl">نظام عقد</h3>
-    <button class="sidebar-close-btn p-button p-button-icon-only p-button-text text-white lg:hidden">
-      <i class="pi pi-times"></i>
-    </button>
-  </div> -->
+<!-- Sidebar ثابت للشاشات الكبيرة -->
+<p-button
+  icon="pi pi-arrow-left"
+  (click)="visible = true"
+  class="lg:hidden fixed top-4 right-2 z-50 p-button-text p-button-sm"
+/>
 
+<!-- Sidebar Overlay (الشاشات الصغيرة فقط) -->
+<p-sidebar [(visible)]="visible" position="right" class="lg:hidden">
+  <ng-container *ngTemplateOutlet="sidebarContent"></ng-container>
+</p-sidebar>
+
+<!-- Sidebar ثابت (الشاشات الكبيرة فقط) -->
+<div class="main-sidebar hidden lg:flex w-15rem flex-column justify-between relative mt-5">
+  <ng-container *ngTemplateOutlet="sidebarContent"></ng-container>
+</div>
+
+<ng-template #sidebarContent>
   <div class="sidebar-content overflow-y-auto">
     <div class="sidebar-item active flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-home ml-3 text-base"></i>
       <span>لوحة التحكم</span>
     </div>
-
     <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-file ml-3 text-base"></i>
       <span>إدارة العقود</span>
     </div>
-
     <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-times-circle ml-3 text-base"></i>
       <span>العقود المرفوضة</span>
     </div>
-
     <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-bell ml-3 text-base"></i>
       <span>الإشعارات</span>
     </div>
-
     <div class="sidebar-divider border-top-1 border-white-alpha-10 mx-3 my-3"></div>
-
     <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-folder ml-3 text-base"></i>
       <span>الأرشيف</span>
     </div>
-
     <div class="sidebar-divider border-top-1 border-white-alpha-10 mx-3 my-3"></div>
-
     <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-cog ml-3 text-base"></i>
       <span>الإعدادات</span>
     </div>
-
     <div class="sidebar-item flex align-items-center px-4 py-3 cursor-pointer transition-duration-300 border-round-md m-2">
       <i class="pi pi-users ml-3 text-base"></i>
       <span>الدعم الفني</span>
@@ -56,4 +58,4 @@
       © جميع الحقوق محفوظة
     </div>
   </div>
-</nav>
+</ng-template>

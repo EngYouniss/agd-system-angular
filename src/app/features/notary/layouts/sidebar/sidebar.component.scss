@@ -1,11 +1,11 @@
 .main-sidebar {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  background-color: #ffffff;
   box-shadow: 5px 0 25px rgba(0, 0, 0, 0.08);
   color: #2d3748;
   direction: rtl;
   border-left: 1px solid #e2e8f0;
   transition: all 0.4s ease;
-
+  height: 100%;
   .sidebar-header {
     padding: 1.5rem;
     color: rgb(74, 23, 23);

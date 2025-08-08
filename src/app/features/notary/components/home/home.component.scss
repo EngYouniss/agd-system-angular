@@ -1,31 +1,69 @@
+// .quran-text {
+//   font-family: 'Amiri', serif;
+//   font-size: 1.2rem;
+//   line-height: 1.8;
+// }
+.quran-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #157c6a;
+  direction: rtl; /* لو النص عربي */
+}
+
+
 .home-container {
-  .contract-card {
-    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
-    border: 1px solid #e2e8f0;
-    border-radius: 1rem;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+margin: 40px;
+}
+
+.home-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* عمود واحد افتراضي */
+  gap: 1.5rem;
+
+  @media (min-width: 640px) {
+    /* شاشات متوسطة - عمودين */
+    grid-template-columns: repeat(2, 1fr);
+        justify-content: center; /* توسيط الشبكة */
+
+  }
+
+  @media (min-width: 1224px) {
+    /* شاشات كبيرة - 3 أعمدة بعرض ثابت */
+    grid-template-columns: repeat(3, 300px);
+    justify-content: center; /* توسيط الشبكة */
+  }
+}
+
+.contract-card {
+  background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+  border: 1px solid #388f80;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 330px;
+
+  i {
+    transition: transform 0.3s ease;
+  }
+
+  button {
+    margin-top: auto;
+    background-color: #006837;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 
     i {
-      transition: transform 0.3s ease;
-    }
-
-    button {
-      margin-top: auto;
-    }
-
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
-
-      i {
-        transform: scale(1.1);
-      }
+      transform: scale(1.1);
     }
   }
 }

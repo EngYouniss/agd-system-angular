@@ -10,6 +10,6 @@ export const routes: Routes = [
   },
   {
     path:'notary',loadChildren:()=>import('./features/notary/notary.routes').then(notary=>notary.NOTARY_ROUTES),
-    canActivate:[authGuard] 
+    // canActivate:[authGuard]
   }
 ];

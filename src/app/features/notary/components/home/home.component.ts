@@ -4,6 +4,7 @@ import { NavbarComponent } from "../../layouts/navbar/navbar.component";
 import { SidebarComponent } from "../../layouts/sidebar/sidebar.component";
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
+import { StatisticsCardComponent } from "../../partials/statistics-card/statistics-card.component";
 
 
 @Component({
@@ -14,13 +15,15 @@ import { CommonModule } from '@angular/common';
     CardModule,
     CommonModule,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    StatisticsCardComponent
 ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
 
+  sidebarVisible = false;
 
 
 
