@@ -5,6 +5,7 @@ import { SidebarComponent } from "../../layouts/sidebar/sidebar.component";
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { StatisticsCardComponent } from "../../partials/statistics-card/statistics-card.component";
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { StatisticsCardComponent } from "../../partials/statistics-card/statisti
     CommonModule,
     NavbarComponent,
     SidebarComponent,
-    StatisticsCardComponent
+    StatisticsCardComponent,
+    RouterModule
 ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
