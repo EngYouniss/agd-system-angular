@@ -1,0 +1,68 @@
+/* الشريط */
+.custom-stepper ::ng-deep .p-stepper-nav {
+  border: none !important;
+  min-height: 2rem;
+  display: flex;
+  justify-content: space-between;  /* توزيع متساوي */
+  gap: 0;                          /* نشيل أي فجوات إضافية */
+}
+
+/* نشيل أي خط بين المراحل */
+.custom-stepper ::ng-deep .p-stepper-separator {
+  display: none !important;
+}
+
+/* المرحلة */
+.custom-stepper ::ng-deep .p-stepper-header {
+  flex: 1;                         /* كل مرحلة تاخذ نفس المساحة */
+  display: flex;
+  justify-content: center;
+}
+
+/* الزر الداخلي */
+.custom-stepper ::ng-deep .p-stepper-action {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: default !important;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 0;
+  width: 100%;
+}
+
+/* الرقم */
+.custom-stepper ::ng-deep .p-stepper-number {
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  border-radius: 50%;
+  width: 20px;
+  height:20px;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  position: relative;
+  left: 40px;
+  top: 9px;
+}
+
+/* النص */
+.custom-stepper ::ng-deep .p-stepper-title {
+  font-size: 0.75rem;       /* نص أصغر */
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* المرحلة النشطة */
+.custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-number {
+  transform: scale(1.1);
+}
+.custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-title {
+  color: var(--primary-color);
+}

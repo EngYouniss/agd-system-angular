@@ -1,1 +1,242 @@
-<p>add-marriage-contract works!</p>
+<app-navbar></app-navbar>
+
+<h3 class=" ">إنشاء عقد زواج</h3>
+
+<div class="card mb-4">
+  <p-stepper [linear]="true" class="custom-stepper">
+    <!-- Step 1 -->
+    <p-stepperPanel header="بيانات الزوج">
+      <ng-template
+        pTemplate="content"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى بيانات الزوج
+        </div>
+
+        <div class="flex pt-4 justify-content-end">
+          <p-button
+            label="التالي"
+            icon="pi pi-arrow-left"
+            iconPos="left"
+            (onClick)="nextCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <!-- Step 2 -->
+    <p-stepperPanel header="بيانات الزوجة">
+      <ng-template
+        pTemplate="content"
+        let-nextCallback="nextCallback"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى بيانات الزوجة
+        </div>
+
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+          <p-button
+            label="التالي"
+            icon="pi pi-arrow-left"
+            iconPos="left"
+            (onClick)="nextCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <!-- Step 3 -->
+    <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+     <p-stepperPanel header="معلومات العقد">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+      >
+        <div
+          class="flex flex-column h-12rem justify-content-center align-items-center border-2 border-dashed surface-border border-round surface-ground font-medium"
+        >
+          محتوى معلومات العقد
+        </div>
+
+        <div class="flex pt-4 justify-content-start">
+          <p-button
+            label="السابق"
+            icon="pi pi-arrow-right"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</div>
