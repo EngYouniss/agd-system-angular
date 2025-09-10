@@ -11,7 +11,7 @@ describe('AddMarriageContractComponent', () => {
       imports: [AddMarriageContractComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(AddMarriageContractComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

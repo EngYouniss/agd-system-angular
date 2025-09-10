@@ -2,21 +2,24 @@
 .custom-stepper ::ng-deep .p-stepper-nav {
   border: none !important;
   min-height: 2rem;
-  display: flex;
-  justify-content: space-between;  /* توزيع متساوي */
-  gap: 0;                          /* نشيل أي فجوات إضافية */
+  display: inline-flex;     /* مو full width */
+  justify-content: flex-start;
+  gap: 0rem;                /* المسافة بين الخطوات */
+  padding: 0 .5rem;
+  background: transparent;
 }
 
-/* نشيل أي خط بين المراحل */
+/* نخفي الخطوط بين المراحل */
 .custom-stepper ::ng-deep .p-stepper-separator {
   display: none !important;
 }
 
-/* المرحلة */
+/* كل مرحلة حجمها على قد محتواها */
 .custom-stepper ::ng-deep .p-stepper-header {
-  flex: 1;                         /* كل مرحلة تاخذ نفس المساحة */
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
 }
 
 /* الزر الداخلي */
@@ -25,44 +28,101 @@
   border: none !important;
   box-shadow: none !important;
   cursor: default !important;
-  flex-direction: column;
+  display: flex;
   align-items: center;
-  position: relative;
+  gap: .20rem;
   padding: 0;
-  width: 100%;
 }
 
 /* الرقم */
 .custom-stepper ::ng-deep .p-stepper-number {
-  background: var(--primary-color) !important;
+  all: unset; /* نشيل كل التنسيقات الإفتراضية */
+  background: rgb(21, 124, 106) !important;
   color: #fff !important;
-  border-radius: 50%;
-  width: 20px;
-  height:20px;
-  font-size: 0.75rem;
-  display: flex;
+  border-radius: 50% !important;
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 0.55rem !important;
+  display: flex !important;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  margin-bottom: 0.25rem;
+  font-weight: bold !important;
+  line-height: 1 !important; /* نمنع التمدد */
   position: relative;
-  left: 40px;
-  top: 9px;
+  top: -6px;
+  right: -4px;
+  padding: 0 !important;   /* مهم عشان ما تكبر */
+  min-width: unset !important;
+  min-height: unset !important;
+  box-shadow: none !important;
 }
+
 
 /* النص */
 .custom-stepper ::ng-deep .p-stepper-title {
-  font-size: 0.75rem;       /* نص أصغر */
+  font-size: 0.90rem;
   font-weight: 600;
   color: var(--text-color);
-  text-align: center;
   white-space: nowrap;
 }
 
 /* المرحلة النشطة */
 .custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-number {
+  background: rgb(252, 206, 135) !important;
   transform: scale(1.1);
 }
 .custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-title {
-  color: var(--primary-color);
+  color: rgb(220, 187, 138);
 }
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: .5rem; /* مسافة بين الأيقونة والعنوان */
+  margin: 1rem 1.5rem;
+}
+
+.page-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2f3b45;
+  margin: 0; /* نشيل أي هوامش داخلية */
+}
+
+.back-icon {
+  font-size: 1.2rem;
+  color: #0b7e6c; /* نفس لون العلامة الخضراء */
+  cursor: pointer;
+  transition: color .2s;
+}
+.back-icon:hover {
+  color: #2ca58d; /* يفتح لونه عند المرور */
+}
+
+
+.field {
+  display: flex;
+  align-items: center;   /* يخلي النص بمحاذاة وسط الحقل */
+  gap: .5rem;            /* مسافة بين اللابل والحقل */
+}
+
+.field-label {
+  margin: 0;             /* نشيل الهامش اللي يخليها فوق */
+  font-size: .85rem;
+  color: #374151;
+  white-space: nowrap;   /* يمنع كسر السطر لو النص طويل */
+}
+
+.f-input.p-inputtext {
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #cfe5df;
+  font-size: .9rem;
+  padding: 0 .5rem;
+  flex: 1;               /* الحقل يتمدد ليملأ المساحة */
+}
+
+.f-input.p-inputtext:focus {
+  outline: 2px solid #0b7e6c;
+  border-color: #0b7e6c;
+}
+
