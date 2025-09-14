@@ -1,74 +1,71 @@
-<div class="surface-card p-3 shadow-2 border-round ">
-  <div class="flex align-items-center justify-content-between w-full" style="direction: rtl;">
+<!-- topbar.component.html -->
+<header class="moj-topbar" dir="rtl">
+  <nav class="moj-row">
+    <!-- اليسار (في RTL هو اليمين بصريًا): شعار + عنوان + زر القائمة للموبايل -->
+    <div class="moj-brand">
+      <button class="hamburger p-button p-button-text p-button-rounded toggle"
+              type="button" aria-label="فتح القائمة"
+              (click)="mobileOpen = !mobileOpen">
+        <i class="pi pi-bars"></i>
+      </button>
 
-    <!-- الجهة اليمنى: الشعار -->
-    <div class="flex align-items-center gap-3">
-      <img src="../../../../../assets/images/logoagd.png" alt="Logo" style="width: 100px; height: 70px;" />
+      <img class="logo" src="assets/images/logoagd.png" alt="وزارة العدل">
+
     </div>
 
-    <!-- الوسط: مربع البحث -->
-    <div class="flex  flex-grow-1 mx-8 ">
-      <span class="p-input-icon-left w-full" style="max-width: 400px;">
+    <!-- الوسط: البحث (يتمدّد) -->
+    <div class="moj-search">
+      <span class="p-input-icon-left w-full">
         <i class="pi pi-search"></i>
-        <input type="text" pInputText placeholder="بحث..." class="w-full" />
+        <input type="text"
+               pInputText
+               class="w-full"
+               placeholder="بحث في النظام…"
+               [(ngModel)]="q"
+               (keyup.enter)="onSearch()"/>
       </span>
     </div>
 
-    <!-- الجهة اليسرى: الاسم + البروفايل + الإشعارات -->
-    <div class="flex align-items-center gap-4">
+    <!-- اليمين: إجراءات سريعة + بروفايل -->
+    <div class="moj-actions">
+      <!-- زر الإشعارات -->
+<button
+  type="button"
+  class="notif-btn p-button p-button-text p-button-rounded"
+  pButton
+  pRipple
+  aria-label="الإشعارات"
+  (click)="notifMenu.toggle($event)"
+>
+  <i class="pi pi-bell" aria-hidden="true"></i>
+  <span class="notif-badge" [class.is-hidden]="!(unreadCount > 0)">{{ unreadCount }}</span>
+</button>
 
-      <div class="notification-wrapper" style="position: relative; display: inline-block;">
-  <button pButton type="button" icon="pi pi-bell"
-    class="notification-btn p-button-rounded p-button-text surface-0 shadow-2 relative"
-     pRipple
-    style="background-color: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-  </button>
-
-  <span class="notification-badge"
-    style="
-      position: absolute;
-      top: -1px;
-      left: -8px;
-      width: 20px;
-      height: 20px;
-      background-color: blueviolet;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1rem;
-      font-weight: 700;
-      text-shadow: 0 0 5px rgba(0,0,0,0.4);
-      user-select: none;
-    ">
-    5
-  </span>
+<p-menu #notifMenu [popup]="true" [model]="notifItems"></p-menu>
 
 
-</div>
-
-
-
-
-      <!-- اسم + بروفايل مع القائمة -->
-      <div
-        class="flex align-items-center gap-3 cursor-pointer p-2 border-round hover:surface-hover transition-duration-200"
-        (click)="profileMenu.toggle($event)">
-        <!-- صورة البروفايل -->
-        <p-avatar image="../../../../../assets/images/logoagd.png" shape="circle" size="xlarge">
-        </p-avatar>
-
-        <!-- معلومات المستخدم -->
-        <div class="flex flex-column">
-          <span class="font-bold text-color text-lg pb-1 ">منصور علي</span>
-          <small class="text-color-secondary">أمين شرعي معتمد</small>
+      <div class="profile" (click)="profileMenu.toggle($event)">
+        <p-avatar image="assets/images/logoagd.png" shape="circle" size="large"></p-avatar>
+        <div class="user-info">
+          <span class="name">منصور علي</span>
+          <small class="role">أمين شرعي معتمد</small>
         </div>
       </div>
+      <p-menu #profileMenu [popup]="true" [model]="profileItems"></p-menu>
+    </div>
+  </nav>
 
 
-      <p-menu #profileMenu [popup]="true" [model]="profileMenuItems"></p-menu>
 
+  <!-- لوحة الموبايل (تُفتح بزر الهامبرجر) -->
+  <div class="moj-mobile" [class.open]="mobileOpen" (click)="mobileOpen=false">
+    <div class="panel" (click)="$event.stopPropagation()">
+      <a class="panel-link" *ngFor="let l of mainLinks" [routerLink]="l.routerLink" (click)="mobileOpen=false">
+        <i [class]="l.icon"></i><span>{{ l.label }}</span>
+      </a>
+      <div class="panel-divider"></div>
+      <a class="panel-link" routerLink="/profile" (click)="mobileOpen=false"><i class="pi pi-user"></i><span>الملف الشخصي</span></a>
+      <a class="panel-link" routerLink="/settings" (click)="mobileOpen=false"><i class="pi pi-cog"></i><span>الإعدادات</span></a>
     </div>
   </div>
-</div>
+</header>

@@ -1,128 +1,290 @@
+/* ====== الأساس: عرض كامل وتوافق RTL ====== */
+.custom-stepper { width: 100%; }
+.custom-stepper ::ng-deep .p-stepper { width: 100%; }
+
 /* الشريط */
-.custom-stepper ::ng-deep .p-stepper-nav {
+.custom-stepper ::ng-deep .p-stepper-nav{
   border: none !important;
   min-height: 2rem;
-  display: inline-flex;     /* مو full width */
+  width: 100%;
+  display: flex;             /* full width */
+  flex-wrap: wrap;           /* يلفّ على الشاشات الواسعة */
+  align-items: center;
   justify-content: flex-start;
-  gap: 0rem;                /* المسافة بين الخطوات */
-  padding: 0 .5rem;
+  gap: .5rem;                /* مسافة بين العناصر */
+  padding: .25rem .75rem;
   background: transparent;
 }
 
-/* نخفي الخطوط بين المراحل */
-.custom-stepper ::ng-deep .p-stepper-separator {
-  display: none !important;
+/* إخفاء الفواصل */
+.custom-stepper ::ng-deep .p-stepper-separator{ display:none !important; }
+
+/* عنصر المرحلة */
+.custom-stepper ::ng-deep .p-stepper-header{
+  display:flex; align-items:center; justify-content:flex-start;
+  position:relative;
+  padding: .25rem .5rem;
+  border-radius: .5rem;
+  scroll-snap-align: start;          /* للانزلاق بالسحب على الموبايل */
+  max-width: 100%;
 }
 
-/* كل مرحلة حجمها على قد محتواها */
-.custom-stepper ::ng-deep .p-stepper-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-}
-
-/* الزر الداخلي */
-.custom-stepper ::ng-deep .p-stepper-action {
+/* زر المرحلة الداخلي */
+.custom-stepper ::ng-deep .p-stepper-action{
   background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  border: none !important; box-shadow: none !important;
   cursor: default !important;
-  display: flex;
-  align-items: center;
-  gap: .20rem;
-  padding: 0;
+  display:flex; align-items:center; gap:.35rem; padding:0;
 }
 
-/* الرقم */
-.custom-stepper ::ng-deep .p-stepper-number {
-  all: unset; /* نشيل كل التنسيقات الإفتراضية */
-  background: rgb(21, 124, 106) !important;
-  color: #fff !important;
+/* رقم المرحلة (تكبير قليل للمسّ) */
+.custom-stepper ::ng-deep .p-stepper-number{
+  all: unset;
+  background: rgb(21,124,106) !important; color:#fff !important;
   border-radius: 50% !important;
-  width: 15px !important;
-  height: 15px !important;
-  font-size: 0.55rem !important;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold !important;
-  line-height: 1 !important; /* نمنع التمدد */
-  position: relative;
-  top: -6px;
-  right: -4px;
-  padding: 0 !important;   /* مهم عشان ما تكبر */
-  min-width: unset !important;
-  min-height: unset !important;
-  box-shadow: none !important;
+  width: 18px !important; height: 18px !important;   /* ↑ كان 15px */
+  font-size: .6rem !important; font-weight:700 !important; line-height:1 !important;
+  display:flex !important; justify-content:center; align-items:center;
+  position:relative; top: -4px; inset-inline-end: -2px; /* يدعم RTL/LTR */
+  padding:0 !important; min-width:unset !important; min-height:unset !important;
+  box-shadow:none !important;
 }
 
-
-/* النص */
-.custom-stepper ::ng-deep .p-stepper-title {
-  font-size: 0.90rem;
-  font-weight: 600;
-  color: var(--text-color);
-  white-space: nowrap;
+/* عنوان المرحلة */
+.custom-stepper ::ng-deep .p-stepper-title{
+  font-size:.92rem; font-weight:600; color: var(--text-color);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  max-width: 24ch;                       /* لا يتمدد بزيادة */
 }
 
 /* المرحلة النشطة */
-.custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-number {
-  background: rgb(252, 206, 135) !important;
-  transform: scale(1.1);
+.custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-number{
+  background: rgb(252,206,135) !important; transform: scale(1.06);
 }
-.custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-title {
-  color: rgb(220, 187, 138);
-}
-.page-header {
-  display: flex;
-  align-items: center;
-  gap: .5rem; /* مسافة بين الأيقونة والعنوان */
-  margin: 1rem 1.5rem;
+.custom-stepper ::ng-deep .p-stepper-header.p-highlight .p-stepper-title{
+  color: rgb(220,187,138);
 }
 
-.page-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #2f3b45;
-  margin: 0; /* نشيل أي هوامش داخلية */
+/* رأس الصفحة */
+.page-header{
+  display:flex; align-items:center; gap:.5rem;
+  margin: 1rem 1rem;
+}
+.page-title{ font-size:1.25rem; font-weight:700; color:#2f3b45; margin:0; }
+.back-icon{ font-size:1.2rem; color:#0b7e6c; cursor:pointer; transition:color .2s; }
+.back-icon:hover{ color:#2ca58d; }
+
+/* الحقول */
+.field{ display:flex; align-items:center; gap:.5rem; }
+.field-label{
+  margin:0; font-size:.85rem; color:#374151; white-space:nowrap;
+}
+.f-input.p-inputtext{
+  height: 40px; border-radius: 8px; border:1px solid #cfe5df;
+  font-size:.95rem; padding:0 .6rem; flex:1;
+}
+.f-input.p-inputtext:focus{ outline:2px solid #0b7e6c; border-color:#0b7e6c; }
+
+/* ====== RESPONSIVE ====== */
+
+/* شاشات < 992px: ضغط العناوين قليلاً */
+@media (max-width: 991.98px){
+  .custom-stepper ::ng-deep .p-stepper-title{ max-width: 18ch; font-size:.9rem; }
 }
 
-.back-icon {
-  font-size: 1.2rem;
-  color: #0b7e6c; /* نفس لون العلامة الخضراء */
-  cursor: pointer;
-  transition: color .2s;
-}
-.back-icon:hover {
-  color: #2ca58d; /* يفتح لونه عند المرور */
+/* شاشات < 768px: الشريط يصير أفقي قابل للتمرير مع Snap */
+@media (max-width: 767.98px){
+  .custom-stepper ::ng-deep .p-stepper-nav{
+    flex-wrap: nowrap;          /* لا يلف */
+    overflow-x: auto;           /* سحب أفقي */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: .35rem;
+    padding-inline: .5rem;
+  }
+
+  /* تحسين مظهر العنصر */
+  .custom-stepper ::ng-deep .p-stepper-header{
+    background: rgba(11,126,108,.06);
+  }
+
+  /* تصغير العنوان أكثر مع إظهار النشط بوضوح */
+  .custom-stepper ::ng-deep .p-stepper-title{
+    max-width: 14ch; font-size:.85rem;
+  }
+  .custom-stepper ::ng-deep .p-stepper-header:not(.p-highlight) .p-stepper-title{
+    opacity:.85;
+  }
+
+  /* المساحة الرأسية */
+  .page-header{ margin: .75rem .75rem; }
+  .page-title{ font-size:1.1rem; }
 }
 
+/* شاشات < 576px: عنوان مخفّض، الأزرار تترتب عمودياً، الحقول عمودية */
+@media (max-width: 575.98px){
+  /* الشريط: عناصر مدمجة وسهلة السحب */
+  .custom-stepper ::ng-deep .p-stepper-title{ max-width: 11ch; font-size:.8rem; }
+  .custom-stepper ::ng-deep .p-stepper-number{
+    width: 20px !important; height: 20px !important; top: 0; inset-inline-end: 0;
+  }
 
-.field {
-  display: flex;
-  align-items: center;   /* يخلي النص بمحاذاة وسط الحقل */
-  gap: .5rem;            /* مسافة بين اللابل والحقل */
+  /* الأزرار داخل أشرطة التنقّل بين المراحل */
+  .flex.pt-3.justify-content-between{
+    flex-wrap: wrap; gap: .5rem;
+  }
+  .flex.pt-3.justify-content-between .p-button{
+    flex: 1 1 48%;
+  }
+  .flex.pt-3.justify-content-end .p-button{
+    width: 100%;
+  }
+
+  /* الحقول: سطر فوق سطر */
+  .field{
+    align-items: stretch; flex-direction: column; gap: .35rem;
+  }
+  .field-label{
+    white-space: normal; font-size: .84rem;
+  }
+  .f-input.p-inputtext{ width: 100%; height: 42px; font-size: .95rem; }
+
+  /* الكارد تحته هوامش مناسبة */
+  .card.mb-4{ margin: .5rem; }
 }
 
-.field-label {
-  margin: 0;             /* نشيل الهامش اللي يخليها فوق */
-  font-size: .85rem;
-  color: #374151;
-  white-space: nowrap;   /* يمنع كسر السطر لو النص طويل */
+/* تحسين شريط التمرير على الموبايل (اختياري) */
+.custom-stepper ::-webkit-scrollbar{ height: 6px; }
+.custom-stepper ::-webkit-scrollbar-thumb{ background: #cfe5df; border-radius: 8px; }
+.custom-stepper ::-webkit-scrollbar-track{ background: transparent; }
+/* === إضافة فقط: جعل الستِبّر يتمدّد ويتحرّك أفقياً عند الضيق بدون تغيير المسافات === */
+.custom-stepper { width: 100%; }
+.custom-stepper ::ng-deep .p-stepper { width: 100%; }
+
+.custom-stepper ::ng-deep .p-stepper-nav{
+  /* لا نغيّر gap أو padding الأصليين */
+  max-width: 100%;
+  overflow-x: auto;         /* تمرير أفقي عند صِغَر الشاشة */
+  overflow-y: hidden;
+  flex-wrap: nowrap;        /* صف واحد دائماً */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity; /* سحب أنعم */
 }
 
-.f-input.p-inputtext {
-  height: 36px;
+.custom-stepper ::ng-deep .p-stepper-header{
+  /* خلي كل خطوة على قَدّ محتواها بالضبط */
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  max-width: 100%;
+}
+
+.custom-stepper ::ng-deep .p-stepper-title{
+  /* بدون تغيير مسافات الخطوات: بس قصّ النص الطويل بدل ما يكسر السطر */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: clamp(10ch, 24vw, 28ch);
+}
+
+/* شريط تمرير أنظف (اختياري) */
+.custom-stepper ::-webkit-scrollbar{ height: 6px; }
+.custom-stepper ::-webkit-scrollbar-thumb{ background: #cfe5df; border-radius: 8px; }
+.custom-stepper ::-webkit-scrollbar-track{ background: transparent; }
+
+/* === Responsiveness لباقي الصفحة بدون لمس مسافات الخطوات === */
+@media (max-width: 767.98px){
+  .page-header{ margin: .75rem; gap: .5rem; }
+  .page-title{ font-size: 1.1rem; }
+
+  /* الأزرار داخل ألواح الستِبّر */
+  .flex.pt-3.justify-content-between{
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .flex.pt-3.justify-content-between .p-button{
+    flex: 1 1 48%;
+  }
+  .flex.pt-3.justify-content-end .p-button{
+    width: 100%;
+  }
+
+  /* الحقول عمودية */
+  .field{
+    flex-direction: column;
+    align-items: stretch;
+    gap: .35rem;
+  }
+  .field-label{
+    white-space: normal;
+  }
+  .f-input.p-inputtext{
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px){
+  /* فقط تصغير نص العنوان داخل الخطوة لو الشاشة صغيرة جداً */
+  .custom-stepper ::ng-deep .p-stepper-title{
+    max-width: clamp(10ch, 40vw, 18ch);
+    font-size: .85rem;
+  }
+  .card.mb-4{ margin: .5rem; }
+}
+
+/* داخل نفس ملف ستايل الكومبوننت */
+// .husband-form .grid { gap: 0rem 0rem; }
+
+/* توحيد ارتفاعات PrimeNG + input */
+.husband-form .f-input,
+.husband-form ::ng-deep .p-inputtext,
+.husband-form ::ng-deep .p-dropdown,
+.husband-form ::ng-deep .p-calendar .p-inputtext,
+.husband-form ::ng-deep .p-calendar,
+.husband-form ::ng-deep .p-inputwrapper {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+.husband-form ::ng-deep .p-calendar .p-button { height: 36px !important; }
+
+/* محاذاة label + input */
+.husband-form .field {
+  display:flex; align-items:center; gap:.5rem;
+}
+.husband-form .field-label{
+  margin:0;
+  font-size:.85rem; color:#374151;
+  white-space:nowrap;
+  min-width: 100px;          /* عرض ثابت ينسق الأعمدة */
+}
+
+/* إدخالات */
+.husband-form .f-input.p-inputtext{
+  flex:1;
+  padding: 0 .6rem;
   border-radius: 6px;
-  border: 1px solid #cfe5df;
-  font-size: .9rem;
-  padding: 0 .5rem;
-  flex: 1;               /* الحقل يتمدد ليملأ المساحة */
+  border:1px solid #cfe5df;
+  font-size:.95rem;
+}
+.husband-form .f-input.p-inputtext:focus{
+  outline:2px solid #0b7e6c; border-color:#0b7e6c;
 }
 
-.f-input.p-inputtext:focus {
-  outline: 2px solid #0b7e6c;
-  border-color: #0b7e6c;
+/* رؤوس الأقسام */
+.husband-form .section-title{
+  font-weight:700; color:#2f3b45; margin:.5rem 0 .25rem;
+  padding:.25rem .5rem; background:#f6faf9; border:1px solid #e4f0ed; border-radius:6px;
 }
 
+/* صورة البصمة */
+.husband-form .fp-preview{
+  max-width:110px; max-height:110px; border:1px solid #e5e7eb; border-radius:8px;
+}
+
+/* تكيّف الشاشات الصغيرة */
+@media (max-width: 991.98px){
+  .husband-form .field-label{ min-width: 104px; }
+}
+@media (max-width: 575.98px){
+  .husband-form .field{ flex-direction:column; align-items:stretch; gap:.35rem; }
+  .husband-form .field-label{ min-width: 0; }
+}

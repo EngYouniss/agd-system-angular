@@ -1,90 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { MenubarModule } from 'primeng/menubar';
-import { BadgeModule } from 'primeng/badge';
-import { AvatarModule } from 'primeng/avatar';
-import { InputTextModule } from 'primeng/inputtext';
+// topbar.component.ts
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RippleModule } from 'primeng/ripple';
-import { MenuModule } from 'primeng/menu';
+import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { AvatarModule } from 'primeng/avatar';
+import { MenuModule } from 'primeng/menu';
+import { BadgeModule } from 'primeng/badge';
+import { RippleModule } from 'primeng/ripple';
+import type { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [
-    MenubarModule,
-    BadgeModule,
-    AvatarModule,
-    InputTextModule,
-    RippleModule,
-    CommonModule,
-    MenuModule,
-    ButtonModule
-  ],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  imports: [CommonModule, FormsModule, ButtonModule, InputTextModule, AvatarModule, MenuModule, BadgeModule, RippleModule],
+   templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
-  items: MenuItem[] = [];
-  profileMenuItems: MenuItem[] = [];
-  notifications: MenuItem[] = [];
+export class NavbarComponent {
+  q = '';
+  unreadCount = 5;
+  mobileOpen = false;
 
-  ngOnInit() {
-    this.items = [
-      { label: 'الرئيسية', icon: 'pi pi-home' },
-      { label: 'الميزات', icon: 'pi pi-star' },
-      { label: 'تواصل معنا', icon: 'pi pi-envelope', badge: '3' }
-    ];
+  notifItems: MenuItem[] = [
+    { label: 'إشعار 1', icon: 'pi pi-bell' },
+    { label: 'إشعار 2', icon: 'pi pi-bell' },
+    { separator: true },
+    { label: 'عرض الكل', icon: 'pi pi-inbox', routerLink: ['/notifications'] }
+  ];
 
-    this.profileMenuItems = [
-      {
-        label: 'الملف الشخصي',
-        icon: 'pi pi-user',
-        command: () => {
-          console.log('عرض الملف الشخصي');
-        }
-      },
-      {
-        label: 'الإعدادات',
-        icon: 'pi pi-cog',
-        command: () => {
-          console.log('فتح الإعدادات');
-        }
-      },
-      { separator: true },
-      {
-        label: 'تسجيل الخروج',
-        icon: 'pi pi-sign-out',
-        command: () => {
-          console.log('تسجيل الخروج');
-        }
-      }
-    ];
+  profileItems: MenuItem[] = [
+    { label: 'الملف الشخصي', icon: 'pi pi-user', routerLink: ['/profile'] },
+    { label: 'الإعدادات', icon: 'pi pi-cog', routerLink: ['/settings'] },
+    { separator: true },
+    { label: 'تسجيل الخروج', icon: 'pi pi-sign-out', command: () => {/* نفّذ الخروج */} }
+  ];
 
-    this.notifications = [
-      {
-        label: 'طلب تبرع جديد',
-        icon: 'pi pi-inbox',
-        command: () => {
-          console.log('عرض الإشعار 1');
-        }
-      },
-      {
-        label: 'تم قبول تبرعك',
-        icon: 'pi pi-check-circle',
-        command: () => {
-          console.log('عرض الإشعار 2');
-        }
-      },
-      {
-        label: 'تحديث في حسابك',
-        icon: 'pi pi-cog',
-        command: () => {
-          console.log('عرض الإشعار 3');
-        }
-      }
-    ];
+  mainLinks: MenuItem[] = [
+    { label: 'الرئيسية', icon: 'pi pi-home', routerLink: ['/dashboard'] },
+    { label: 'العقود', icon: 'pi pi-book', routerLink: ['/contracts'] },
+    { label: 'الأشخاص', icon: 'pi pi-users', routerLink: ['/people'] },
+    { label: 'التقارير', icon: 'pi pi-chart-bar', routerLink: ['/reports'] }
+  ];
+
+  onSearch() {
+    if (!this.q?.trim()) return;
+    // نفّذ عملية البحث أو انتقل لصفحة نتائج
+    // this.router.navigate(['/search'], { queryParams: { q: this.q.trim() } });
   }
-
 }

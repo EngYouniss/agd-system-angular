@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar ></app-navbar>
 
 <div class="page-header">
   <i class="pi pi-arrow-right back-icon"></i>
@@ -8,48 +8,227 @@
 <div class="card mb-4">
   <p-stepper [linear]="true" class="custom-stepper">
 
-    <!-- 1 -->
-    <p-stepperPanel header="بيانات الزوج">
-      <ng-template pTemplate="content" let-nextCallback="nextCallback">
-        <div class="panel-placeholder">
-         <div class="grid mr-6">
-  <div class="col-3">
-    <div class="field">
-      <label class="field-label">الاسم</label>
-      <input pInputText class="f-input w-full" placeholder=" اسم الزوج" />
-    </div>
-  </div>
+ <p-stepperPanel header="بيانات الزوج">
+  <ng-template pTemplate="content" let-nextCallback="nextCallback">
+    <form #husbandForm="ngForm"
+          (ngSubmit)="onHusbandNext(husbandForm, nextCallback)"
+          novalidate dir="rtl"
+          class="husband-form">
 
-  <div class="col-2">
-    <div class="field">
-      <!-- <label class="field-label">اسم الاب</label> -->
-      <input pInputText class="f-input w-full" placeholder="اسم الاب " />
-    </div>
-  </div>
-  <div class="col-2">
-    <div class="field">
-      <!-- <label class="field-label">اسم الجد</label> -->
-      <input pInputText class="f-input w-full" placeholder="اسم الجد" />
-    </div>
-  </div>
-  <div class="col-2">
-    <div class="field">
-      <!-- <label class="field-label">اللقب</label> -->
-      <input pInputText class="f-input w-full" placeholder="اللقب" />
-    </div>
-  </div>
-</div>
+      <div class="grid">
 
- <div class="field">
-            <label class="field-label ">الاسم </label>
-            <input pInputText class="f-input" placeholder="اكتب الاسم هنا" />
+        <!-- الاسم الرباعي -->
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">الاسم</label>
+            <input pInputText class="f-input w-full"
+                   name="firstName" [(ngModel)]="husband.firstName"
+                   required minlength="2" />
           </div>
         </div>
-        <div class="flex pt-3 justify-content-end">
-          <p-button label="التالي" icon="pi pi-arrow-left" iconPos="left" (onClick)="nextCallback.emit()"></p-button>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">اسم الأب</label>
+            <input pInputText class="f-input w-full"
+                   name="fatherName" [(ngModel)]="husband.fatherName"
+                   required minlength="2" />
+          </div>
         </div>
-      </ng-template>
-    </p-stepperPanel>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">اسم الجد</label>
+            <input pInputText class="f-input w-full"
+                   name="grandName" [(ngModel)]="husband.grandName"
+                   required minlength="2" />
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">اللقب</label>
+            <input pInputText class="f-input w-full"
+                   name="familyName" [(ngModel)]="husband.familyName"
+                   required minlength="2" />
+          </div>
+        </div>
+
+        <!-- وثيقة إثبات الشخصية -->
+        <div class="col-12 section-title">وثيقة إثبات الشخصية</div>
+
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">نوع الوثيقة</label>
+            <p-dropdown class="w-full"
+                        [options]="idTypes" optionLabel="label" optionValue="value"
+                        name="idType" [(ngModel)]="husband.idType"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">رقم الوثيقة</label>
+            <input pInputText class="f-input w-full"
+                   name="idNumber" [(ngModel)]="husband.idNumber"
+                   required minlength="4" />
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">جهة الإصدار</label>
+            <input pInputText class="f-input w-full"
+                   name="idIssuer" [(ngModel)]="husband.idIssuer"
+                   required />
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">تاريخ الإصدار (م)</label>
+            <p-calendar class="w-full" [showIcon]="true" [maxDate]="today"
+                        dateFormat="yy-mm-dd"
+                        name="idIssueDateG" [(ngModel)]="husband.idIssueDateG"
+                        required></p-calendar>
+          </div>
+        </div>
+
+        <!-- محل وتاريخ الميلاد -->
+        <div class="col-12 section-title">محل وتاريخ الميلاد</div>
+
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">المحافظة</label>
+            <p-dropdown class="w-full"
+                        [options]="governorates" optionLabel="label" optionValue="value"
+                        name="birthGov" [(ngModel)]="husband.birthGov"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">المديرية</label>
+        <p-dropdown class="w-full"
+                        [options]="governorates" optionLabel="label" optionValue="value"
+                        name="birthGov" [(ngModel)]="husband.birthGov"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">تاريخ الميلاد (م)</label>
+            <p-calendar class="w-full" [showIcon]="true" [maxDate]="today"
+                        dateFormat="yy-mm-dd"
+                        name="birthDateG" [(ngModel)]="husband.birthDateG"
+                        required></p-calendar>
+          </div>
+        </div>
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">تاريخ الميلاد (هـ)</label>
+            <input pInputText class="f-input w-full"
+                   name="birthDateH" [(ngModel)]="husband.birthDateH"
+                   placeholder="YYYY-MM-DD" />
+          </div>
+        </div>
+
+        <!-- محل الإقامة المعتاد -->
+        <div class="col-12 section-title">محل الإقامة المعتاد</div>
+
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">المحافظة</label>
+            <p-dropdown class="w-full"
+                        [options]="governorates" optionLabel="label" optionValue="value"
+                        name="resGov" [(ngModel)]="husband.resGov"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">المديرية</label>
+          <p-dropdown class="w-full"
+                        [options]="governorates" optionLabel="label" optionValue="value"
+                        name="birthGov" [(ngModel)]="husband.birthGov"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">الجنسية</label>
+            <p-dropdown class="w-full"
+                        [options]="nationalities" optionLabel="label" optionValue="value"
+                        name="nationality" [(ngModel)]="husband.nationality"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+
+        <!-- الحالة السابقة / التعليم / المهنة -->
+        <div class="col-12 md:col-4 ">
+          <div class="field">
+            <label class="field-label ml-5">الحالة الاجتماعية السابقة</label>
+            <p-dropdown class="w-full "
+                        [options]="prevMaritalStatuses"
+                        name="prevStatus" [(ngModel)]="husband.prevStatus"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">المستوى التعليمي</label>
+            <p-dropdown class="w-full"
+                        [options]="educations"
+                        name="education" [(ngModel)]="husband.education"
+                        placeholder="اختر" required></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">المهنة</label>
+            <input pInputText class="f-input w-full"
+                   name="job" [(ngModel)]="husband.job"
+                   required minlength="2" />
+          </div>
+        </div>
+
+        <!-- اسم الأم / موافقة / بصمة -->
+        <div class="col-12 md:col-3">
+          <div class="field">
+            <label class="field-label">اسم الأم بالكامل</label>
+            <input pInputText class="f-input w-full"
+                   name="motherFullName" [(ngModel)]="husband.motherFullName"
+                   required minlength="3" />
+          </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">الموافقة</label>
+            <div class="flex align-items-center gap-2">
+              <p-checkbox name="consent" [(ngModel)]="husband.consent" [binary]="true" inputId="consent"></p-checkbox>
+              <label for="consent">موافق على الزواج بنفسه</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+          <div class="field">
+            <label class="field-label">بصمة الزوج</label>
+            <div class="flex align-items-center gap-3">
+              <input type="file" accept="image/*" (change)="onFingerprintChange($event)">
+              <img *ngIf="husband.fingerprintPreview" [src]="husband.fingerprintPreview"
+                   alt="بصمة" class="fp-preview">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex pt-3 justify-content-end">
+        <button pButton type="submit" [disabled]="husbandForm.invalid || !husband.consent"
+                label="التالي" icon="pi pi-arrow-left" iconPos="left"></button>
+      </div>
+    </form>
+  </ng-template>
+</p-stepperPanel>
+
+
 
     <!-- 2 -->
     <p-stepperPanel header="بيانات الزوجة">

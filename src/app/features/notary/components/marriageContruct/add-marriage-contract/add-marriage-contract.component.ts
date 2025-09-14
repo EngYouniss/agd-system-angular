@@ -5,6 +5,7 @@ import {
 } from '@angular/forms';
 
 import { NavbarComponent } from "../../../layouts/navbar/navbar.component";
+import { NgForm } from '@angular/forms';
 
 /* PrimeNG */
 import { StepperModule } from 'primeng/stepper';
@@ -15,8 +16,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
-
-interface Option { label: string; value: any; }
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-marriage-contract',
@@ -28,87 +28,96 @@ interface Option { label: string; value: any; }
     /* للفورم */
     FormsModule, ReactiveFormsModule,
     InputTextModule, DropdownModule, CalendarModule,
-    CheckboxModule, InputMaskModule, TooltipModule
-  ],
+    CheckboxModule, InputMaskModule, TooltipModule,
+    NgIf
+],
   templateUrl: './add-marriage-contract.component.html',
   styleUrl: './add-marriage-contract.component.scss'
 })
 export class AddMarriageContractComponent {
+today = new Date();
 
-  // خيارات القوائم
-  regions: Option[] = [
-    {label:'الرياض', value:'riyadh'},
-    {label:'مكة المكرمة', value:'makkah'},
-    {label:'المدينة المنورة', value:'madinah'},
-    {label:'الشرقية', value:'east'}
-  ];
-  cities: Option[] = [
-    {label:'الرياض', value:'riyadh'},
-    {label:'جدة', value:'jeddah'},
-    {label:'الدمام', value:'dammam'}
-  ];
-  nationalities: Option[] = [
-    {label:'سعودية', value:'sa'},
-    {label:'مصرية', value:'eg'},
-    {label:'يمنية', value:'ye'}
-  ];
-  education: Option[] = [
-    {label:'ثانوي', value:'highschool'},
-    {label:'دبلوم', value:'diploma'},
-    {label:'جامعي', value:'bachelor'},
-    {label:'دراسات عليا', value:'grad'}
-  ];
-  social: Option[] = [
-    {label:'عزباء', value:'single'},
-    {label:'متزوجة', value:'married'},
-    {label:'مطلقة', value:'divorced'},
-    {label:'أرملة', value:'widowed'}
-  ];
+husband = {
+  // الاسم الرباعي
+  firstName: '', fatherName: '', grandName: '', familyName: '',
+  // وثيقة إثبات الشخصية
+  idType: null as string | null,
+  idNumber: '',
+  idIssuer: '',
+  idIssueDateG: null as Date | null,
+  // الميلاد
+  birthGov: null as string | null,
+  birthDistrict: '',
+  birthDateG: null as Date | null,
+  birthDateH: '',
+  // الإقامة المعتادة
+  resGov: null as string | null,
+  resDistrict: '',
+  nationality: null as string | null,
+  // حالات أخرى
+  prevStatus: null as string | null,
+  education: null as string | null,
+  job: '',
+  motherFullName: '',
+  // موافقة وبصمة
+  consent: false,
+  fingerprintFile: null as File | null,
+  fingerprintPreview: '' as string | ''
+};
 
-  /* === نموذج بيانات الزوجة (الخطوة 1) === */
-  wifeForm = this.fb.group({
-    name: ['', Validators.required],
-    idType: [''],
-    idNumber: this.fb.array(new Array(10).fill(null).map(() => this.fb.control(''))),
-    idIssueDate: [null],
-    idIssuer: [''],
-    nationality: [''],
-    birthPlace: [''],
-    birthDate: [null],
-    habitualRegion: [''],
-    habitualCity: [''],
-    socialStatus: [''],
-    job: [''],
-    educationLevel: [''],
-    status: [''],
-    motherFullName: [''],
-    consentSelf: [false],
-    phone: ['']
-  });
+idTypes = [
+  { label: 'بطاقة شخصية', value: 'nid' },
+  { label: 'جواز سفر',   value: 'passport' },
+  { label: 'رخصة قيادة', value: 'license' },
+  { label: 'وثيقة أخرى', value: 'other' }
+];
 
-  constructor(private fb: FormBuilder) {}
+governorates = [
+  { label: 'صنعاء', value: 'sanaa' },
+  { label: 'تعز',   value: 'taiz'  },
+  { label: 'إب',    value: 'ibb'   },
+  { label: 'الحديدة', value: 'hodeidah' },
+  { label: 'عدن', value: 'aden' }
+];
 
-  /* أدوات مساعدة لرقم الهوية */
-  get idBoxes(): FormArray { return this.wifeForm.get('idNumber') as FormArray; }
-  getIdBox(i: number): FormControl { return this.idBoxes.at(i) as FormControl; }
+nationalities = [
+  { label: 'يمني', value: 'YE' },
+  { label: 'سعودي', value: 'SA' },
+  { label: 'مصري', value: 'EG' },
+  { label: 'أخرى', value: 'OTHER' }
+];
 
-  onIdInput(e: Event, i: number) {
-    const input = e.target as HTMLInputElement;
-    const max = input.maxLength > 0 ? input.maxLength : 1;
-    if (input.value.length >= max) {
-      const wrap = input.parentElement; if (!wrap) return;
-      const inputs = wrap.querySelectorAll('input.nid-box');
-      const next = inputs[i + 1] as HTMLInputElement | undefined;
-      next?.focus();
-    }
+prevMaritalStatuses = [
+  { label: 'أعزب', value: 'single' },
+  { label: 'متزوج سابقًا', value: 'married_before' },
+  { label: 'مطلّق', value: 'divorced' },
+  { label: 'أرمل', value: 'widower' }
+];
+
+educations = [
+  { label: 'ثانوي', value: 'hs' },
+  { label: 'دبلوم', value: 'diploma' },
+  { label: 'بكالوريوس', value: 'bachelor' },
+  { label: 'ماجستير', value: 'master' },
+  { label: 'دكتوراه', value: 'phd' }
+];
+
+onHusbandNext(form: any, next: any) {
+  if (form.invalid || !this.husband.consent) {
+    form.form.markAllAsTouched();
+    return;
   }
-  onIdBackspace(e: KeyboardEvent, i: number) {
-    const input = e.target as HTMLInputElement;
-    if (e.key === 'Backspace' && !input.value) {
-      const wrap = input.parentElement; if (!wrap) return;
-      const inputs = wrap.querySelectorAll('input.nid-box');
-      const prev = inputs[i - 1] as HTMLInputElement | undefined;
-      if (prev) { prev.focus(); prev.select(); }
-    }
-  }
+  next.emit();
+}
+
+onFingerprintChange(e: Event) {
+  const input = e.target as HTMLInputElement;
+  const file = input.files?.[0];
+  if (!file) { this.husband.fingerprintFile = null; this.husband.fingerprintPreview = ''; return; }
+  this.husband.fingerprintFile = file;
+  const reader = new FileReader();
+  reader.onload = () => { this.husband.fingerprintPreview = String(reader.result || ''); };
+  reader.readAsDataURL(file);
+}
+
 }
